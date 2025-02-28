@@ -1,31 +1,30 @@
 package com.company.models;
 
 public class Vehicle {
-    private String name;
-    private int model;
+    private String model;
+    private int capacity;
     private Location location;
 
-    public Vehicle(String name, int model, Location location)
-    {
-        this.name = name;
+    public Vehicle(String model, int capacity, Location location) {
         this.model = model;
+        this.capacity = capacity;
         this.location = location;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(int model) {
+    public void setModel(String model) {
         this.model = model;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public Location getLocation() {

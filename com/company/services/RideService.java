@@ -15,42 +15,42 @@ public class RideService {
 
     private UserService userService = UserService.getInstance();
 
-    private static Integer MAX_DISTANCE = 4;
-    private RideService(){
+    private static final Integer MAX_DISTANCE = 4;
 
+    private RideService() {
     }
 
-    public static RideService getInstance(){
-        if(rideService == null){
+    public static RideService getInstance() {
+        if (rideService == null) {
             rideService = new RideService();
         }
         return rideService;
     }
 
-    public Driver bookRide(int riderId, Location fromLocation, Location toLocation) throws DriverNotAvailableException{
-        Rider rider = userService.riderMap.get(riderId);
+    public Driver bookRide(int riderId, Location fromLocation, Location toLocation) throws DriverNotAvailableException {
+        Rider rider = userService.getRiderMap().get(riderId);
         List<Driver> driverList = getAllAvailableDrivers(fromLocation);
-        if(driverList.isEmpty()){
-            throw new DriverNotAvailableException("Not driver found");
+        if (driverList.isEmpty()) {
+            throw new DriverNotAvailableException("No driver found");
         }
-        driverList.get(0).setAvailable(false);
-        Ride ride = new Ride(driverList.get(0), rider, fromLocation, toLocation);
+        Driver assignedDriver = driverList.get(0);
+        assignedDriver.setAvailable(false);
+        Ride ride = new Ride(assignedDriver, rider, fromLocation, toLocation);
         rider.getRideList().add(ride);
-        return driverList.get(0);
+        return assignedDriver;
     }
 
     public List<Driver> getAllAvailableDrivers(Location location) {
-        List<Driver> driverList = new ArrayList<Driver>();
-        for(Driver driver : userService.getDriverMap().values()){
-            if(driver.isAvailable() && distance(driver.getVehicle().getLocation(), location) <= MAX_DISTANCE){
+        List<Driver> driverList = new ArrayList<>();
+        for (Driver driver : userService.getDriverMap().values()) {
+            if (driver.isAvailable() && distance(driver.getVehicle().getLocation(), location) <= MAX_DISTANCE) {
                 driverList.add(driver);
             }
         }
         return driverList;
     }
 
-    public Integer distance(Location l1, Location l2){
+    public Integer distance(Location l1, Location l2) {
         return Math.abs(l1.getX() - l2.getX()) + Math.abs(l1.getY() - l2.getY());
     }
-
 }

@@ -10,11 +10,12 @@ public class Rider extends User {
     private Location toLocation;
     private List<Ride> rideList = new ArrayList<Ride>();
 
-    public Rider(String name, int id, Gender gender, Location fromLocation, Location toLocation){
+    public Rider(String name, int id, Gender gender, Location fromLocation, Location toLocation) {
         super(name, id, gender);
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
     }
+
     public Location getFromLocation() {
         return fromLocation;
     }

@@ -6,7 +6,7 @@ public class Ride {
     private Location fromLocation;
     private Location toLocation;
 
-    public Ride(Driver driver, Rider rider, Location fromLocation, Location toLocation){
+    public Ride(Driver driver, Rider rider, Location fromLocation, Location toLocation) {
         this.driver = driver;
         this.rider = rider;
         this.fromLocation = fromLocation;
