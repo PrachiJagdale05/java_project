@@ -8,9 +8,17 @@ import com.company.models.Location;
 import com.company.models.Rider;
 import com.company.models.Vehicle;
 import com.company.services.CabBookingService;
+import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
+        try {
+            Database.initialize();
+            System.out.println("Database initialized successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error initializing database: " + e.getMessage());
+        }
+
         CabBookingService cabBookingService = CabBookingService.getInstance();
         Location l1 = new Location(0, 0);
         Location l2 = new Location(8, 8);
